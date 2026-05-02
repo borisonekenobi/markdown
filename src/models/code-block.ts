@@ -10,8 +10,8 @@ export class CodeBlock implements BlockWithNoInline {
 	}
 
 	public serialize(): string {
-		return `\`\`\`${this.language ? this.language : ''}\n
-		${this.code}\n
-		\`\`\``;
+		return `\`\`\`${this.language ?
+			this.language :
+			''}\n${this.code}\n\`\`\``;
 	}
 }

@@ -8,6 +8,17 @@ export class Text implements InlineWithNoInline {
 	}
 
 	public serialize(): string {
-		return this.value;
+		return escapeMarkdown(this.value);
 	}
+}
+
+function escapeMarkdown(value: string): string {
+	return value.replaceAll('\\', '\\\\').
+		replaceAll('`', '\\`').
+		replaceAll('*', '\\*').
+		replaceAll('_', '\\_').
+		replaceAll('~', '\\~').
+		replaceAll(':', '\\:').
+		replaceAll('[', '\\[').
+		replaceAll(']', '\\]');
 }

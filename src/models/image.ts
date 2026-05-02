@@ -12,6 +12,8 @@ export class Image implements InlineWithNoInline {
 	}
 
 	public serialize(): string {
-		return `![${this.alt}](${this.src} \"${this.title}\")`;
+		return `![${this.alt}](${this.src}${this.title ?
+			` "${this.title}"` :
+			''})`;
 	}
 }
