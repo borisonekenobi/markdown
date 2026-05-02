@@ -15,16 +15,17 @@ export class DefinitionList implements BlockWithNoInline {
 }
 
 export class DefinitionItem implements FileElement {
-	public term: InlineElement[];
+	public inlines: InlineElement[];
 	public definitions: BlockElement[];
 
-	public constructor(term: InlineElement[], definitions: BlockElement[]) {
-		this.term = term;
+	public constructor(inlines: InlineElement[], definitions: BlockElement[]) {
+		this.inlines = inlines;
 		this.definitions = definitions;
 	}
 
 	public serialize(): string {
-		return `${this.term.map(
-			term => term.serialize())}\n:${this.definitions.join('\n:')}`;
+		return `${this.inlines.map(inline => inline.serialize()).
+			join('')}\n:${this.definitions.map(
+			definition => definition.serialize()).join('\n:')}`;
 	}
 }

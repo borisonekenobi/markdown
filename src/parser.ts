@@ -49,7 +49,7 @@ import {Text} from './models/text.js';
 import {Image} from './models/image.js';
 import {HorizontalRule} from './models/horizontal-rule.js';
 import {LineBreak} from './models/line-break.js';
-import {List, ListElement} from './models/list.js';
+import {List, ListItem} from './models/list.js';
 import {HTML} from './models/html.js';
 import {LinkReference} from './models/link-reference.js';
 import {Definition} from './models/definition.js';
@@ -177,12 +177,12 @@ function parseLinkReference(node: mdastLinkReference): LinkReference {
 }
 
 function parseList(node: mdastList): List {
-	return new List(node.ordered ?? false, node.children.map(parseListElement),
+	return new List(node.ordered ?? false, node.children.map(parseListItem),
 		node.start ?? undefined);
 }
 
-function parseListElement(node: mdastListItem): ListElement {
-	return new ListElement(node.children.map(parseRootContent),
+function parseListItem(node: mdastListItem): ListItem {
+	return new ListItem(node.children.map(parseRootContent),
 		node.checked ?? undefined);
 }
 

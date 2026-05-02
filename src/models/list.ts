@@ -1,12 +1,12 @@
-import type {BlockElement, BlockWithNoInline} from './block-element.js';
 import type {FileElement} from './file-element.js';
+import type {BlockElement, BlockWithNoInline} from './block-element.js';
 
 export class List implements BlockWithNoInline {
 	public ordered: boolean;
-	public items: ListElement[];
+	public items: ListItem[];
 	public start?: number | undefined;
 
-	public constructor(ordered: boolean, items: ListElement[], start?: number) {
+	public constructor(ordered: boolean, items: ListItem[], start?: number) {
 		this.ordered = ordered;
 		this.items = items;
 		this.start = start;
@@ -21,7 +21,7 @@ export class List implements BlockWithNoInline {
 	}
 }
 
-export class ListElement implements FileElement {
+export class ListItem implements FileElement {
 	public blocks: BlockElement[];
 	public checked?: boolean | undefined;
 
