@@ -57,8 +57,8 @@ import {ImageReference} from './models/image-reference.js';
 import {FootnoteReference} from './models/footnote-reference.js';
 import {Table, TableCell, TableRow} from './models/table.js';
 
-export function parseMarkdown(document: string): Document {
-	return parseAST(unified().use(remarkParse).use(remarkGfm).parse(document));
+export function parse(markdown: string): Document {
+	return parseAST(unified().use(remarkParse).use(remarkGfm).parse(markdown));
 }
 
 function parseAST(ast: Root): Document {
