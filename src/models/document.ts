@@ -2,7 +2,7 @@ import type {FileElement} from './file-element.js';
 import type {BlockElement} from './block-element.js';
 
 export class Document implements FileElement {
-	blocks: BlockElement[];
+	public blocks: BlockElement[];
 
 	public constructor(blocks: BlockElement[]) {
 		this.blocks = blocks;

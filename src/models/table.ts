@@ -1,6 +1,6 @@
+import type {FileElement} from './file-element.js';
 import type {BlockWithNoInline} from './block-element.js';
 import type {InlineElement} from './inline-element.js';
-import type {FileElement} from './file-element.js';
 
 export type AlignType = 'center' | 'left' | 'right' | null;
 

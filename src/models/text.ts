@@ -13,12 +13,23 @@ export class Text implements InlineWithNoInline {
 }
 
 function escapeMarkdown(value: string): string {
-	return value.replaceAll('\\', '\\\\').
+	return value.
+		replaceAll('\\', '\\\\').
 		replaceAll('`', '\\`').
 		replaceAll('*', '\\*').
 		replaceAll('_', '\\_').
 		replaceAll('~', '\\~').
-		replaceAll(':', '\\:').
+		replaceAll('{', '\\{').
+		replaceAll('}', '\\}').
 		replaceAll('[', '\\[').
-		replaceAll(']', '\\]');
+		replaceAll(']', '\\]').
+		replaceAll('<', '\\<').
+		replaceAll('>', '\\>').
+		replaceAll('(', '\\(').
+		replaceAll(')', '\\)').
+		replaceAll('#', '\\#').
+		replaceAll('+', '\\+').
+		replaceAll('-', '\\-').
+		replaceAll('.', '\\.').
+		replaceAll('!', '\\!');
 }

@@ -19,4 +19,3 @@ export class Definition implements BlockElement {
 		return `[${this.label || this.identifier}]: ${this.url}${titlePart}`;
 	}
 }
-
