@@ -1,1 +1,1 @@
-# @marka/markdown
+# @marka-editor/markdown
