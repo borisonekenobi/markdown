@@ -1,6 +1,6 @@
 // Core API
-export {parseMarkdown} from './parser.js';
-export {serializeMarkdown} from './serializer.js';
+export {parse} from './parser.js';
+export {serialize} from './serializer.js';
 
 // Core model
 export {Document} from './models/document.js';
