@@ -9,6 +9,6 @@ export class Document implements FileElement {
 	}
 
 	public serialize(): string {
-		return this.blocks.map(block => block.serialize()).join('\n\n');
+		return `${this.blocks.map(block => block.serialize()).join('\n\n')}\n`;
 	}
 }

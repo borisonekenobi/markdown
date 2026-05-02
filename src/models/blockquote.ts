@@ -8,6 +8,8 @@ export class Blockquote implements BlockWithManyBlocks {
 	}
 
 	public serialize(): string {
-		return `> ${this.blocks.map(block => block.serialize()).join('\n> ')}`;
+		return `> ${this.blocks.map(block => block.serialize().
+			replaceAll('\n', '\n> ')).
+			join('\n> ')}`;
 	}
 }

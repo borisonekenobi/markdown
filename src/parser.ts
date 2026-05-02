@@ -167,16 +167,18 @@ function parseHeading(node: mdastHeading): Heading {
 }
 
 function parseLink(node: mdastLink): Link {
-	return new Link(node.children.map(parseRootContent), node.url);
+	return new Link(node.children.map(parseRootContent), node.url,
+		node.title ?? undefined);
 }
 
 function parseLinkReference(node: mdastLinkReference): LinkReference {
 	return new LinkReference(node.children.map(parseRootContent),
-		node.identifier);
+		node.identifier, node.label ?? undefined);
 }
 
 function parseList(node: mdastList): List {
-	return new List(node.ordered ?? false, node.children.map(parseListElement));
+	return new List(node.ordered ?? false, node.children.map(parseListElement),
+		node.start ?? undefined);
 }
 
 function parseListElement(node: mdastListItem): ListElement {
@@ -193,7 +195,8 @@ function parseBold(node: Strong): Bold {
 }
 
 function parseTable(node: mdastTable): Table {
-	return new Table(node.children.map(parseTableRow));
+	return new Table(node.children.map(parseTableRow),
+		node.align ?? new Array(node.children.length).fill(null));
 }
 
 function parseTableRow(node: mdastTableRow): TableRow {
