@@ -63,8 +63,8 @@ jobs:
 
       - uses: actions/upload-artifact@v7
         with:
-          name: angular-sitemap-generator-${{ needs.get-version.outputs.version }}.tgz
-          path: angular-sitemap-generator-${{ needs.get-version.outputs.version }}.tgz
+          name: marka-editor-markdown-${{ needs.get-version.outputs.version }}.tgz
+          path: marka-editor-markdown-${{ needs.get-version.outputs.version }}.tgz
 
   #  TODO: test:
   #    name: Test Package
