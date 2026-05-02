@@ -1,4 +1,4 @@
-const exec = require('node:child_process').exec;
+import {exec} from 'node:child_process';
 
 exec('npm pkg get version --json', getVersion);
 
