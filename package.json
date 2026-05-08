@@ -35,9 +35,13 @@
     "access": "public"
   },
   "dependencies": {
+    "rehype-parse": "^9.0.1",
+    "rehype-remark": "^10.0.1",
     "remark": "^15.0.1",
     "remark-gfm": "^4.0.1",
-    "remark-parse": "^11.0.0"
+    "remark-html": "^16.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-stringify": "^11.0.0"
   },
   "devDependencies": {
     "typescript": "^6.0.3"
