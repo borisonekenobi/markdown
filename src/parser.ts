@@ -32,8 +32,6 @@ import type {
 } from 'mdast';
 
 import type {FileElement} from './models/file-element.js';
-// import type {InlineCode} from './models/inline-code.js';
-// import type {BlockElement} from './models/block-element.js';
 import {Document} from './models/document.js';
 import {CodeBlock} from './models/code-block.js';
 import {Blockquote} from './models/blockquote.js';
@@ -248,4 +246,3 @@ function parseImageReference(node: mdastImageReference): ImageReference {
 function parseHorizontalRule(): HorizontalRule {
 	return new HorizontalRule();
 }
-

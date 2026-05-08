@@ -1,6 +1,8 @@
 // Core API
 export {parse} from './parser.js';
 export {serialize} from './serializer.js';
+// TODO: use normal parse and serialize functions later, these are just for testing
+export {tmpParse, tmpSerialize} from './tempFuncs.js';
 
 // Core model
 export {Document} from './models/document.js';
