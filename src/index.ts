@@ -2,7 +2,8 @@
 export {parse} from './parser.js';
 export {serialize} from './serializer.js';
 // TODO: use normal parse and serialize functions later, these are just for testing
-export {tmpParse, tmpSerialize} from './tempFuncs.js';
+export {tmpParse} from './parse.js';
+export {tmpSerialize} from './serialize.js';
 
 // Core model
 export {Document} from './models/document.js';
