@@ -1,3 +1,4 @@
+import type {VFile} from 'vfile';
 import {unified} from 'unified';
 import rehypeParse from 'rehype-parse';
 import rehypeRaw from 'rehype-raw';
@@ -11,11 +12,12 @@ import remarkStringify from 'remark-stringify';
 import {handlers, stringifyHandlers} from './handlers/index.js';
 
 /**
- * Serialize HTML string -> markdown
- * @param html
+ * Parses HTML to a VFile containing Markdown.
+ * @param html The HTML to parse.
+ * @returns A VFile containing the resulting Markdown.
  */
-export async function tmpSerialize(html: string): Promise<string> {
-	const vfile = await unified().
+export function serialize(html: string): Promise<VFile> {
+	return unified().
 		use(rehypeParse, {fragment: true}).
 		use(rehypeRaw).
 		use(rehypeRemark, {handlers}).
@@ -32,6 +34,4 @@ export async function tmpSerialize(html: string): Promise<string> {
 			handlers: stringifyHandlers,
 		}).
 		process(html);
-
-	return String(vfile);
 }

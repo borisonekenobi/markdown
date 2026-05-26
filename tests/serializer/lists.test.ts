@@ -1,5 +1,5 @@
 import {describe, expect, test} from 'vitest';
-import {tmpSerialize} from '../../src/index.js';
+import {serialize} from '../../src/index.js';
 
 describe('Ordered Lists', () => {
 	test('in order counting', async () => {
@@ -7,7 +7,8 @@ describe('Ordered Lists', () => {
 			'<li>Second item</li>\n' +
 			'<li>Third item</li>\n' + '<li>Fourth item</li>\n' + '</ol>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('1. First item\n' + '2. Second item\n' +
 				'3. Third item\n' + '4. Fourth item\n');
@@ -20,7 +21,8 @@ describe('Ordered Lists', () => {
 			'<li>Indented item</li>\n' + '</ol>\n' + '</li>\n' +
 			'<li>Fourth item</li>\n' + '</ol>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('1. First item\n' +
 				'\n' +
@@ -41,7 +43,8 @@ describe('Unordered Lists', () => {
 			'<li>Second item</li>\n' +
 			'<li>Third item</li>\n' + '<li>Fourth item</li>\n' + '</ul>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).toBe(
 			'* First item\n' +
 			'* Second item\n' +
@@ -57,7 +60,8 @@ describe('Unordered Lists', () => {
 			'<li>Indented item</li>\n' + '</ul>\n' + '</li>\n' +
 			'<li>Fourth item</li>\n' + '</ul>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('* First item\n' +
 				'\n' +
@@ -75,7 +79,8 @@ describe('Unordered Lists', () => {
 		const input = '<ul>\n' + '<li>1968. A great year!</li>\n' +
 			'<li>I think 1969 was second best.</li>\n' + '</ul>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('* 1968\\. A great year!\n' +
 				'* I think 1969 was second best.\n');
@@ -88,7 +93,8 @@ describe('Unordered Lists', () => {
 			'<li>Third item</li>\n' + '</ul>\n' + '<ul>\n' +
 			'<li>Fourth item</li>\n' + '</ul>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('* First item\n' +
 				'\n' +
@@ -108,7 +114,8 @@ describe('Task Lists', () => {
 			'<li class="task-list-item"><input type="checkbox" disabled> Contact the media</li>\n' +
 			'</ul>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('* [x] Write the press release\n' +
 				'* [ ] Update the website\n' +
@@ -131,7 +138,8 @@ describe('Elements in Lists', () => {
 			'</li>\n' +
 			'</ul>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('* This is the first list item.\n' +
 				'\n' +
@@ -158,7 +166,8 @@ describe('Elements in Lists', () => {
 			'</li>\n' +
 			'</ul>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('* This is the first list item.\n' +
 				'\n' +
@@ -187,7 +196,8 @@ describe('Elements in Lists', () => {
 			'</li>\n' +
 			'</ol>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('1. Open the file.\n' +
 				'\n' +
@@ -217,7 +227,8 @@ describe('Elements in Lists', () => {
 			'</li>\n' +
 			'</ol>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('1. Open the file containing the Linux mascot.\n' +
 				'\n' +
@@ -241,7 +252,8 @@ describe('Elements in Lists', () => {
 			'<li>Fourth item</li>\n' +
 			'</ol>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('1. First item\n' +
 				'\n' +

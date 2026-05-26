@@ -1,5 +1,5 @@
 import {describe, expect, test} from 'vitest';
-import {tmpParse} from '../../src/index.js';
+import {parse} from '../../src/index.js';
 
 describe('Definition Lists', () => {
 	test('parses definition lists', async () => {
@@ -8,7 +8,8 @@ describe('Definition Lists', () => {
 			'Second Term\n' + ': This is one definition of the second term.\n' +
 			': This is another definition of the second term.';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('<dl>\n' + '<dt>First Term</dt>\n' +
 				'<dd>This is the definition of the first term.\n' + '</dd>\n' +

@@ -1,11 +1,12 @@
 import {describe, expect, test} from 'vitest';
-import {tmpSerialize} from '../../src/index.js';
+import {serialize} from '../../src/index.js';
 
 describe('Horizontal Rules', () => {
 	test('hr tag', async () => {
 		const input = '<hr>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).toBe('---\n');
 	});
 
@@ -13,7 +14,8 @@ describe('Horizontal Rules', () => {
 		const input = '<h2>Without blank lines, this would be a heading.</h2>\n' +
 			'<p>Don\'t do this!</p>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).toBe(
 			'## Without blank lines, this would be a heading.\n' +
 			'\n' +

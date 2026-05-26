@@ -1,11 +1,12 @@
 import {describe, expect, test} from 'vitest';
-import {tmpParse} from '../../src/index.js';
+import {parse} from '../../src/index.js';
 
 describe('Blockquotes', () => {
 	test('simple', async () => {
 		const input = '> Dorothy followed her through many of the beautiful rooms in her castle.';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('<blockquote>\n' +
 				'<p>Dorothy followed her through many of the beautiful rooms in her castle.</p>\n' +
@@ -17,7 +18,8 @@ describe('Blockquotes', () => {
 			'>\n' +
 			'> The Witch bade her clean the pots and kettles and sweep the floor and keep the fire fed with wood.';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('<blockquote>\n' +
 				'<p>Dorothy followed her through many of the beautiful rooms in her castle.</p>\n' +
@@ -30,7 +32,8 @@ describe('Blockquotes', () => {
 			'>\n' +
 			'>> The Witch bade her clean the pots and kettles and sweep the floor and keep the fire fed with wood.';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('<blockquote>\n' +
 				'<p>Dorothy followed her through many of the beautiful rooms in her castle.</p>\n' +
@@ -45,7 +48,8 @@ describe('Blockquotes', () => {
 			'> - Profits were higher than ever.\n' + '>\n' +
 			'>  *Everything* is going according to **plan**.';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('<blockquote>\n' +
 				'<h4>The quarterly results look great!</h4>\n' + '<ul>\n' +
@@ -59,7 +63,8 @@ describe('Blockquotes', () => {
 		const input = 'Without blank lines, this might not look right.\n' +
 			'> This is a blockquote\n' + 'Don\'t do this!';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('<p>Without blank lines, this might not look right.</p>\n' +
 				'<blockquote>\n' +

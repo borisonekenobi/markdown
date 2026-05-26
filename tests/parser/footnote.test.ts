@@ -1,5 +1,5 @@
 import {describe, expect, test} from 'vitest';
-import {tmpParse} from '../../src/index.js';
+import {parse} from '../../src/index.js';
 
 describe('Footnotes', () => {
 	test('simple', async () => {
@@ -15,7 +15,8 @@ describe('Footnotes', () => {
 			'\n' +
 			'    Add as many paragraphs as you like.';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).toBe(
 			'<p>Here\'s a simple footnote,<sup><a href="#user-content-fn-1" id="user-content-fnref-1" data-footnote-ref="" aria-describedby="footnote-label">1</a></sup> and here\'s a longer one.<sup><a href="#user-content-fn-bignote" id="user-content-fnref-bignote" data-footnote-ref="" aria-describedby="footnote-label">2</a></sup></p>\n' +
 			'<section data-footnotes="" class="footnotes"><h2 class="sr-only" id="footnote-label">Footnotes</h2>\n' +

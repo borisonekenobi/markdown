@@ -1,11 +1,12 @@
 import {describe, expect, test} from 'vitest';
-import {tmpSerialize} from '../../src/index.js';
+import {serialize} from '../../src/index.js';
 
 describe('Emoji', () => {
 	test('copy-pasted', async () => {
 		const input = '<p>😂</p>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).toBe('😂\n');
 	});
 
@@ -13,7 +14,8 @@ describe('Emoji', () => {
 		const input = '<p>Gone camping! ⛺ Be back soon.</p>\n' +
 			'<p>That is so funny! 😂</p>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('Gone camping! ⛺ Be back soon.\n' + '\n' +
 				'That is so funny! 😂\n');

@@ -1,12 +1,13 @@
 import {describe, expect, test} from 'vitest';
-import {tmpParse} from '../../src/index.js';
+import {parse} from '../../src/index.js';
 
 describe('Ordered Lists', () => {
 	test('in order counting', async () => {
 		const input = '1. First item\n' + '2. Second item\n' +
 			'3. Third item\n' + '4. Fourth item';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('<ol>\n' + '<li>First item</li>\n' + '<li>Second item</li>\n' +
 				'<li>Third item</li>\n' + '<li>Fourth item</li>\n' + '</ol>');
@@ -16,7 +17,8 @@ describe('Ordered Lists', () => {
 		const input = '1. First item\n' + '1. Second item\n' +
 			'1. Third item\n' + '1. Fourth item';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('<ol>\n' + '<li>First item</li>\n' + '<li>Second item</li>\n' +
 				'<li>Third item</li>\n' + '<li>Fourth item</li>\n' + '</ol>');
@@ -26,7 +28,8 @@ describe('Ordered Lists', () => {
 		const input = '1. First item\n' + '8. Second item\n' +
 			'3. Third item\n' + '5. Fourth item';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('<ol>\n' + '<li>First item</li>\n' + '<li>Second item</li>\n' +
 				'<li>Third item</li>\n' + '<li>Fourth item</li>\n' + '</ol>');
@@ -37,7 +40,8 @@ describe('Ordered Lists', () => {
 			'3. Third item\n' + '    1. Indented item\n' +
 			'    2. Indented item\n' + '4. Fourth item';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('<ol>\n' + '<li>First item</li>\n' + '<li>Second item</li>\n' +
 				'<li>Third item\n' + '<ol>\n' + '<li>Indented item</li>\n' +
@@ -48,7 +52,8 @@ describe('Ordered Lists', () => {
 	test('parenthesis delimiter', async () => {
 		const input = '1) First item\n' + '2) Second item';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('<ol>\n' + '<li>First item</li>\n' + '<li>Second item</li>\n' +
 				'</ol>');
@@ -60,7 +65,8 @@ describe('Unordered Lists', () => {
 		const input = '- First item\n' + '- Second item\n' + '- Third item\n' +
 			'- Fourth item';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('<ul>\n' + '<li>First item</li>\n' + '<li>Second item</li>\n' +
 				'<li>Third item</li>\n' + '<li>Fourth item</li>\n' + '</ul>');
@@ -70,7 +76,8 @@ describe('Unordered Lists', () => {
 		const input = '* First item\n' + '* Second item\n' + '* Third item\n' +
 			'* Fourth item';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('<ul>\n' + '<li>First item</li>\n' + '<li>Second item</li>\n' +
 				'<li>Third item</li>\n' + '<li>Fourth item</li>\n' + '</ul>');
@@ -80,7 +87,8 @@ describe('Unordered Lists', () => {
 		const input = '+ First item\n' + '+ Second item\n' + '+ Third item\n' +
 			'+ Fourth item';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('<ul>\n' + '<li>First item</li>\n' + '<li>Second item</li>\n' +
 				'<li>Third item</li>\n' + '<li>Fourth item</li>\n' + '</ul>');
@@ -90,7 +98,8 @@ describe('Unordered Lists', () => {
 		const input = '- First item\n' + '- Second item\n' + '- Third item\n' +
 			'    - Indented item\n' + '    - Indented item\n' + '- Fourth item';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('<ul>\n' + '<li>First item</li>\n' + '<li>Second item</li>\n' +
 				'<li>Third item\n' + '<ul>\n' + '<li>Indented item</li>\n' +
@@ -102,7 +111,8 @@ describe('Unordered Lists', () => {
 		const input = '- 1968\\. A great year!\n' +
 			'- I think 1969 was second best.';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('<ul>\n' + '<li>1968. A great year!</li>\n' +
 				'<li>I think 1969 was second best.</li>\n' + '</ul>');
@@ -112,7 +122,8 @@ describe('Unordered Lists', () => {
 		const input = '+ First item\n' + '* Second item\n' + '- Third item\n' +
 			'+ Fourth item';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('<ul>\n' + '<li>First item</li>\n' + '</ul>\n' + '<ul>\n' +
 				'<li>Second item</li>\n' + '</ul>\n' + '<ul>\n' +
@@ -127,7 +138,8 @@ describe('Task Lists', () => {
 			'- [ ] Update the website\n' +
 			'- [ ] Contact the media';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('<ul class="contains-task-list">\n' +
 				'<li class="task-list-item"><input type="checkbox" checked disabled> Write the press release</li>\n' +
@@ -146,7 +158,8 @@ describe('Elements in Lists', () => {
 			'\n' +
 			'* And here\'s the third list item.';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('<ul>\n' +
 				'<li>\n' +
@@ -170,7 +183,8 @@ describe('Elements in Lists', () => {
 			'\n' +
 			'* And here\'s the third list item.';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('<ul>\n' +
 				'<li>\n' +
@@ -199,7 +213,8 @@ describe('Elements in Lists', () => {
 			'\n' +
 			'3. Update the title to match the name of your website.';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('<ol>\n' +
 				'<li>\n' +
@@ -227,7 +242,8 @@ describe('Elements in Lists', () => {
 			'\n' +
 			'3. Close the file.';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('<ol>\n' +
 				'<li>\n' +
@@ -251,7 +267,8 @@ describe('Elements in Lists', () => {
 			'    - Indented item\n' +
 			'4. Fourth item';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('<ol>\n' +
 				'<li>First item</li>\n' +

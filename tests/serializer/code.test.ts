@@ -1,18 +1,20 @@
 import {describe, expect, test} from 'vitest';
-import {tmpSerialize} from '../../src/index.js';
+import {serialize} from '../../src/index.js';
 
 describe('Code', () => {
 	test('backticks', async () => {
 		const input = '<p>At the command prompt, type <code>nano</code>.</p>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).toBe('At the command prompt, type `nano`.\n');
 	});
 
 	test('escaping backticks', async () => {
 		const input = '<p><code>Use `code` in your Markdown file.</code></p>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).toBe('``Use `code` in your Markdown file.``\n');
 	});
 });
@@ -22,7 +24,8 @@ describe('Code Blocks', () => {
 		const input = '<pre><code>&#x3C;html>\n' + '  &#x3C;head>\n' +
 			'  &#x3C;/head>\n' + '&#x3C;/html>\n' + '</code></pre>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('```\n' +
 				'<html>\n' +
@@ -37,7 +40,8 @@ describe('Code Blocks', () => {
 			'  "lastName": "Smith",\n' + '  "age": 25\n' + '}\n' +
 			'</code></pre>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('```\n' + '{\n' + '  "firstName": "John",\n' +
 				'  "lastName": "Smith",\n' + '  "age": 25\n' + '}\n' + '```\n');
@@ -52,7 +56,8 @@ describe('Syntax Highlighting', () => {
 			'  <span class="hljs-attr">"age"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">25</span>\n' +
 			'<span class="hljs-punctuation">}</span>\n' + '</code></pre>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('```json\n' + '{\n' + '  "firstName": "John",\n' +
 				'  "lastName": "Smith",\n' + '  "age": 25\n' + '}\n' + '```\n');
