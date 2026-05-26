@@ -1,25 +1,28 @@
 import {describe, expect, test} from 'vitest';
-import {tmpParse} from '../../src/index.js';
+import {parse} from '../../src/index.js';
 
 describe('Horizontal Rules', () => {
 	test('three asterisks', async () => {
 		const input = '***';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).toBe('<hr>');
 	});
 
 	test('three dashes', async () => {
 		const input = '---';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).toBe('<hr>');
 	});
 
 	test('three underscores', async () => {
 		const input = '___';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).toBe('<hr>');
 	});
 
@@ -28,7 +31,8 @@ describe('Horizontal Rules', () => {
 			'---\n' +
 			'Don\'t do this!';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).toBe(
 			'<h2>Without blank lines, this would be a heading.</h2>\n' +
 			'<p>Don\'t do this!</p>');

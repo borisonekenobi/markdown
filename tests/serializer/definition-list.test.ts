@@ -1,5 +1,5 @@
 import {describe, expect, test} from 'vitest';
-import {tmpSerialize} from '../../src/index.js';
+import {serialize} from '../../src/index.js';
 
 describe('Definition Lists', () => {
 	test('serializes definition lists', async () => {
@@ -10,7 +10,8 @@ describe('Definition Lists', () => {
 			'<dd>This is another definition of the second term.\n' + '</dd>\n' +
 			'</dl>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('First Term\n' +
 				': This is the definition of the first term.\n' + '\n' +

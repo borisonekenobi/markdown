@@ -1,5 +1,5 @@
 import {describe, expect, test} from 'vitest';
-import {tmpSerialize} from '../../src/index.js';
+import {serialize} from '../../src/index.js';
 
 describe('Blockquotes', () => {
 	test('simple', async () => {
@@ -7,7 +7,8 @@ describe('Blockquotes', () => {
 			'<p>Dorothy followed her through many of the beautiful rooms in her castle.</p>\n' +
 			'</blockquote>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe(
 				'> Dorothy followed her through many of the beautiful rooms in her castle.\n');
@@ -19,7 +20,8 @@ describe('Blockquotes', () => {
 			'<p>The Witch bade her clean the pots and kettles and sweep the floor and keep the fire fed with wood.</p>\n' +
 			'</blockquote>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe(
 				'> Dorothy followed her through many of the beautiful rooms in her castle.\n' +
@@ -34,7 +36,8 @@ describe('Blockquotes', () => {
 			'<p>The Witch bade her clean the pots and kettles and sweep the floor and keep the fire fed with wood.</p>\n' +
 			'</blockquote>\n' + '</blockquote>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe(
 				'> Dorothy followed her through many of the beautiful rooms in her castle.\n' +
@@ -50,7 +53,8 @@ describe('Blockquotes', () => {
 			'<p><em>Everything</em> is going according to <strong>plan</strong>.</p>\n' +
 			'</blockquote>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('> #### The quarterly results look great!\n' + '>\n' +
 				'> * Revenue was off the chart.\n' +
@@ -63,7 +67,8 @@ describe('Blockquotes', () => {
 			'<blockquote>\n' + '<p>This is a blockquote\n' +
 			'Don\'t do this!</p>\n' + '</blockquote>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('Without blank lines, this might not look right.\n' + '\n' +
 				'> This is a blockquote Don\'t do this!\n');

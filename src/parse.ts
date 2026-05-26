@@ -1,3 +1,4 @@
+import type {VFile} from 'vfile';
 import {unified} from 'unified';
 import remarkParse from 'remark-parse';
 import {
@@ -15,11 +16,12 @@ import rehypeHighlight from 'rehype-highlight';
 import rehypeStringify from 'rehype-stringify';
 
 /**
- * Parse markdown -> HTML string
- * @param markdown
+ * Parses Markdown to a VFile containing HTML.
+ * @param markdown The Markdown to parse.
+ * @returns A VFile containing the resulting HTML.
  */
-export async function tmpParse(markdown: string): Promise<string> {
-	const vfile = await unified().
+export function parse(markdown: string): Promise<VFile> {
+	return unified().
 		use(remarkParse).
 		use(remarkDefinitionList).
 		use(remarkGfm, {singleTilde: false}).
@@ -33,6 +35,4 @@ export async function tmpParse(markdown: string): Promise<string> {
 		use(rehypeHighlight, {detect: false, ignoreMissing: true, prefix: ''}).
 		use(rehypeStringify).
 		process(markdown);
-
-	return String(vfile);
 }

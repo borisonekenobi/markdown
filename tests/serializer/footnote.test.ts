@@ -1,5 +1,5 @@
 import {describe, expect, test} from 'vitest';
-import {tmpSerialize} from '../../src/index.js';
+import {serialize} from '../../src/index.js';
 
 describe('Footnotes', () => {
 	test('simple', async () => {
@@ -18,7 +18,8 @@ describe('Footnotes', () => {
 			'</ol>\n' +
 			'</section>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).toBe(
 			'Here\'s a simple footnote,[^1] and here\'s a longer one.[^bignote]\n' +
 			'\n' +
@@ -59,7 +60,8 @@ describe('Different Inner Elements', () => {
 			'</ol>\n' +
 			'</section>';
 
-		const output = await tmpSerialize(input);
+		const vfile = await serialize(input);
+		const output = vfile.toString();
 		expect(output).toBe(
 			'Here\'s a simple footnote, [^1].\n' +
 			'\n' +

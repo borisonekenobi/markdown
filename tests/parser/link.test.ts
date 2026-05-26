@@ -1,11 +1,12 @@
 import {describe, expect, test} from 'vitest';
-import {tmpParse} from '../../src/index.js';
+import {parse} from '../../src/index.js';
 
 describe('Links', () => {
 	test('simple', async () => {
 		const input = 'My favorite search engine is [Duck Duck Go](https://duckduckgo.com).';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe(
 				'<p>My favorite search engine is <a href="https://duckduckgo.com">Duck Duck Go</a>.</p>');
@@ -14,7 +15,8 @@ describe('Links', () => {
 	test('title', async () => {
 		const input = 'My favorite search engine is [Duck Duck Go](https://duckduckgo.com "The best search engine for privacy").';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe(
 				'<p>My favorite search engine is <a href="https://duckduckgo.com" title="The best search engine for privacy">Duck Duck Go</a>.</p>');
@@ -25,7 +27,8 @@ describe('URLs and Email Addresses', () => {
 	test('quick url', async () => {
 		const input = '<https://www.markdownguide.org>';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe(
 				'<p><a href="https://www.markdownguide.org">https://www.markdownguide.org</a></p>');
@@ -34,7 +37,8 @@ describe('URLs and Email Addresses', () => {
 	test('quick email address', async () => {
 		const input = '<fake@example.com>';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe(
 				'<p><a href="mailto:fake@example.com">fake@example.com</a></p>');
@@ -43,7 +47,8 @@ describe('URLs and Email Addresses', () => {
 	test('automatic url linking', async () => {
 		const input = 'http://www.example.com';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe(
 				'<p><a href="http://www.example.com">http://www.example.com</a></p>');
@@ -52,7 +57,8 @@ describe('URLs and Email Addresses', () => {
 	test('disabling automatic url linking', async () => {
 		const input = '`http://www.example.com`';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe('<p><code>http://www.example.com</code></p>');
 	});
@@ -62,7 +68,8 @@ describe('Formatting Links', () => {
 	test('bold', async () => {
 		const input = 'I love supporting the **[EFF](https://eff.org)**.';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe(
 				'<p>I love supporting the <strong><a href="https://eff.org">EFF</a></strong>.</p>');
@@ -71,7 +78,8 @@ describe('Formatting Links', () => {
 	test('italic', async () => {
 		const input = 'This is the *[Markdown Guide](https://www.markdownguide.org)*.';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe(
 				'<p>This is the <em><a href="https://www.markdownguide.org">Markdown Guide</a></em>.</p>');
@@ -80,7 +88,8 @@ describe('Formatting Links', () => {
 	test('code', async () => {
 		const input = 'See the section on [`code`](#code).';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe(
 				'<p>See the section on <a href="#code"><code>code</code></a>.</p>');
@@ -95,7 +104,8 @@ describe('Reference-style Links', () => {
 			'\n' +
 			'[1]: <https://en.wikipedia.org/wiki/Hobbit#Lifestyle> "Hobbit lifestyles"';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).toBe(
 			'<p>In a hole in the ground there lived a hobbit. Not a nasty, dirty, wet hole, filled with the ends\n' +
 			'of worms and an oozy smell, nor yet a dry, bare, sandy hole with nothing in it to sit down on or to\n' +
@@ -107,7 +117,8 @@ describe('Best Practices', () => {
 	test('link with spaces', async () => {
 		const input = '[link](https://www.example.com/my great page)';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe(
 				'<p>[link](<a href="https://www.example.com/my">https://www.example.com/my</a> great page)</p>');
@@ -116,7 +127,8 @@ describe('Best Practices', () => {
 	test('link with parentheses', async () => {
 		const input = '[a novel](https://en.wikipedia.org/wiki/The_Milagro_Beanfield_War_(novel))';
 
-		const output = await tmpParse(input);
+		const vfile = await parse(input);
+		const output = vfile.toString();
 		expect(output).
 			toBe(
 				'<p><a href="https://en.wikipedia.org/wiki/The_Milagro_Beanfield_War_(novel)">a novel</a></p>');
